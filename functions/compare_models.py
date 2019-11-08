@@ -172,7 +172,7 @@ def sort_compute_metrics_regr(predictions, sort_by='r2'):
     return header, scores
 
 
-def draw_confusion_matrix(predictions, classes, columns=1):
+def draw_confusion_matrix(predictions, classes, columns=2):
     """
     Draws a confusion matrix for all predictions invoked.
     All based on the sklearn library.
@@ -183,7 +183,7 @@ def draw_confusion_matrix(predictions, classes, columns=1):
     :param columns: The number of plots (horizontally) drawn next to each other (default 2)
     :return: Nothing
     """
-    plt.figure(figsize=(25, 15))
+    plt.figure(figsize=(35, 20))
     rows = np.ceil(len(predictions) / columns)
     for i, (model, y_pred, y_true) in enumerate(predictions, 1):
         cm = confusion_matrix(y_true, y_pred)
