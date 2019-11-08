@@ -183,13 +183,14 @@ def draw_confusion_matrix(predictions, classes, columns=2):
     :param columns: The number of plots (horizontally) drawn next to each other (default 2)
     :return: Nothing
     """
-    plt.figure(figsize=(35, 20))
-    rows = np.ceil(len(predictions) / columns)
+    # plt.figure(figsize=(35, 20))
+    # rows = np.ceil(len(predictions) / columns)
     for i, (model, y_pred, y_true) in enumerate(predictions, 1):
+        plt.figure(figsize=(10, 6))
         cm = confusion_matrix(y_true, y_pred)
         cm2 = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 
-        plt.subplot(rows, columns, i)
+        plt.subplot(1, 1, 1)
         plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
         plt.title('Confusion matrix - Model: {}'.format(model))
         plt.colorbar()
@@ -206,7 +207,7 @@ def draw_confusion_matrix(predictions, classes, columns=2):
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
 
-    plt.show()
+        plt.show()
 
 
 def draw_residual_plot(predictions):
