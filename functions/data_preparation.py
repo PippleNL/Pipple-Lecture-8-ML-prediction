@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 
-from sklearn.preprocessing import Imputer, LabelEncoder, OneHotEncoder, StandardScaler, MinMaxScaler
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler, MinMaxScaler
 
 
 def column2num(data, columns):
@@ -64,7 +65,7 @@ def impute_x(x, indices, strategy='drop'):
     elif strategy == 'drop':
         x = pd.DataFrame(x).dropna(axis=0, how='any', inplace=False).values
     elif strategy in ['mean', 'median', 'most_frequent']:
-        imputer = Imputer(missing_values='NaN', strategy=strategy, axis=0)
+        imputer = SimpleImputer(missing_values=np.nan, strategy=strategy, axis=0)
         imputer.fit(x[:, indices])
         x[:, indices] = imputer.transform(x[:, indices])
     else:
